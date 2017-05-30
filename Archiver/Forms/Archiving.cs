@@ -22,6 +22,9 @@ namespace Lab_2.Forms
         private int[] _byteDictionary;
         private Tree _tree;
 
+        private DateTime _timeStartArchiving;
+        private TimeSpan _timeRemaningArchiving;
+
         private readonly BackgroundWorker _backgroundWorkerArchive;
 
         private readonly AddProgress _addProgress;
@@ -38,7 +41,7 @@ namespace Lab_2.Forms
                 this.txbxFilePath.Text = filePath;
                 this.txbxArchivePath.Text = filePath.Remove(filePath.LastIndexOf(@"\") + 1);
             }
-            
+
             this._backgroundWorkerArchive = new BackgroundWorker();
 
             this._setMaximalProgressBarValueDelegate = new SetMaximalProgressBarValueDelegate(this.SetMaximalProgressBarValue);
@@ -64,7 +67,7 @@ namespace Lab_2.Forms
         private void WriteFile()
         {
             this._fileLength = new FileInfo(this.txbxFilePath.Text).Length;
-            
+
             using (BinaryWriter writer = new BinaryWriter(File.Open(this.txbxArchivePath.Text + @"\" + this.txbxArchiveName.Text + ".Haffman", FileMode.Create, FileAccess.ReadWrite, FileShare.Read)))
             {
                 this.WritePreInfo(writer);
@@ -97,10 +100,10 @@ namespace Lab_2.Forms
 
             // name file
             writer.Write(WorkWithFile.OpenFile_FullFileName.ToCharArray());
-            
+
             // length file
             writer.Write(this._fileLength);
-            
+
             // length of tree
             writer.Write((short)this._tree.BinnaryCode.Count);
 
@@ -194,6 +197,11 @@ namespace Lab_2.Forms
             }
             else
             {
+                this._timeStartArchiving = DateTime.Now;
+
+                this.timerProgress.Interval = 100;
+                this.timerProgress.Start();
+
                 this._backgroundWorkerArchive.RunWorkerAsync();
             }
         }
@@ -211,10 +219,36 @@ namespace Lab_2.Forms
             this._backgroundWorkerArchive.CancelAsync();
         }
 
+        private void timerProgress_Tick(object sender, EventArgs e)
+        {
+            TimeSpan passedTime = DateTime.Now - this._timeStartArchiving;
+
+            string temp = passedTime.ToString();
+            this.lblTimer.Text = temp.Remove(temp.Length - 4);
+
+            if (this.progressBar1.Value > 2)
+            {
+                string tempRemaining = (this._timeRemaningArchiving - passedTime).ToString();
+                this.lblTimerRemaining.Text = tempRemaining.Remove(tempRemaining.Length - 4);
+            }
+        }
+        TimeSpan _onePersent;
+        TimeSpan _secondPersent;
         private void ProgressBarAddedProgress()
         {
             try { Invoke(this._addProgress, 1); }
             catch (ObjectDisposedException) { return; }
+
+            if (this.progressBar1.Value == 1)
+                _onePersent = DateTime.Now - this._timeStartArchiving;
+
+            if (this.progressBar1.Value == 2)
+            {
+                TimeSpan temp = DateTime.Now - this._timeStartArchiving;
+
+                _secondPersent = temp - _onePersent;
+                this._timeRemaningArchiving = TimeSpan.FromSeconds(_secondPersent.TotalSeconds * 100);
+            }
         }
 
         private void BackgroundWorkerArchive_DoWork(object sender, DoWorkEventArgs e)

@@ -101,9 +101,8 @@ namespace Lab_2.Forms
         }
         private void WriteFileIntoFile(BinaryReader reader)
         {
-            // Invoke(_setMaximalProgressBarValueDelegate, new FileInfo(this.txbxArhivePath.Text).Length);
-
             string[] filePathAndName = { this.txbxResultPath.Text, @"\", this._fileFullName };
+
             using (BinaryWriter writer = new BinaryWriter(File.Open(string.Concat(filePathAndName),
                                                           FileMode.Create, FileAccess.ReadWrite, FileShare.Read)))
             {

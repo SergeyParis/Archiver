@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txbxFilePath = new System.Windows.Forms.TextBox();
             this.btnArchiving = new System.Windows.Forms.Button();
             this.btnShowInfoBytes = new System.Windows.Forms.Button();
-            this.ShowInfoTree = new System.Windows.Forms.Button();
+            this.btnShowInfoTree = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txbxArchivePath = new System.Windows.Forms.TextBox();
@@ -41,6 +42,11 @@
             this.lblStatusWork = new System.Windows.Forms.Label();
             this.txbxArchiveName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.timerProgress = new System.Windows.Forms.Timer(this.components);
+            this.lblTimer = new System.Windows.Forms.Label();
+            this.lblTimePassed = new System.Windows.Forms.Label();
+            this.lblTimeRemaining = new System.Windows.Forms.Label();
+            this.lblTimerRemaining = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txbxFilePath
@@ -71,14 +77,14 @@
             this.btnShowInfoBytes.Text = "Show info bytes";
             this.btnShowInfoBytes.UseVisualStyleBackColor = true;
             // 
-            // ShowInfoTree
+            // btnShowInfoTree
             // 
-            this.ShowInfoTree.Location = new System.Drawing.Point(204, 59);
-            this.ShowInfoTree.Name = "ShowInfoTree";
-            this.ShowInfoTree.Size = new System.Drawing.Size(94, 23);
-            this.ShowInfoTree.TabIndex = 4;
-            this.ShowInfoTree.Text = "Show tree";
-            this.ShowInfoTree.UseVisualStyleBackColor = true;
+            this.btnShowInfoTree.Location = new System.Drawing.Point(204, 59);
+            this.btnShowInfoTree.Name = "btnShowInfoTree";
+            this.btnShowInfoTree.Size = new System.Drawing.Size(94, 23);
+            this.btnShowInfoTree.TabIndex = 4;
+            this.btnShowInfoTree.Text = "Show tree";
+            this.btnShowInfoTree.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -163,11 +169,60 @@
             this.label3.TabIndex = 13;
             this.label3.Text = "Name";
             // 
+            // timerProgress
+            // 
+            this.timerProgress.Interval = 1;
+            this.timerProgress.Tick += new System.EventHandler(this.timerProgress_Tick);
+            // 
+            // lblTimer
+            // 
+            this.lblTimer.AutoSize = true;
+            this.lblTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblTimer.Location = new System.Drawing.Point(88, 113);
+            this.lblTimer.Name = "lblTimer";
+            this.lblTimer.Size = new System.Drawing.Size(79, 15);
+            this.lblTimer.TabIndex = 14;
+            this.lblTimer.Text = "00:00:00.000";
+            // 
+            // lblTimePassed
+            // 
+            this.lblTimePassed.AutoSize = true;
+            this.lblTimePassed.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblTimePassed.Location = new System.Drawing.Point(4, 113);
+            this.lblTimePassed.Name = "lblTimePassed";
+            this.lblTimePassed.Size = new System.Drawing.Size(81, 15);
+            this.lblTimePassed.TabIndex = 15;
+            this.lblTimePassed.Text = "Time passed:";
+            // 
+            // lblTimeRemaining
+            // 
+            this.lblTimeRemaining.AutoSize = true;
+            this.lblTimeRemaining.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblTimeRemaining.Location = new System.Drawing.Point(408, 113);
+            this.lblTimeRemaining.Name = "lblTimeRemaining";
+            this.lblTimeRemaining.Size = new System.Drawing.Size(97, 15);
+            this.lblTimeRemaining.TabIndex = 16;
+            this.lblTimeRemaining.Text = "Time remaining:";
+            // 
+            // lblTimerRemaining
+            // 
+            this.lblTimerRemaining.AutoSize = true;
+            this.lblTimerRemaining.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblTimerRemaining.Location = new System.Drawing.Point(510, 113);
+            this.lblTimerRemaining.Name = "lblTimerRemaining";
+            this.lblTimerRemaining.Size = new System.Drawing.Size(79, 15);
+            this.lblTimerRemaining.TabIndex = 17;
+            this.lblTimerRemaining.Text = "00:00:00.000";
+            // 
             // Archiving
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(604, 111);
+            this.ClientSize = new System.Drawing.Size(604, 139);
+            this.Controls.Add(this.lblTimerRemaining);
+            this.Controls.Add(this.lblTimeRemaining);
+            this.Controls.Add(this.lblTimePassed);
+            this.Controls.Add(this.lblTimer);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txbxArchiveName);
             this.Controls.Add(this.lblStatusWork);
@@ -177,7 +232,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txbxArchivePath);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.ShowInfoTree);
+            this.Controls.Add(this.btnShowInfoTree);
             this.Controls.Add(this.btnShowInfoBytes);
             this.Controls.Add(this.btnArchiving);
             this.Controls.Add(this.txbxFilePath);
@@ -193,7 +248,7 @@
         private System.Windows.Forms.TextBox txbxFilePath;
         private System.Windows.Forms.Button btnArchiving;
         private System.Windows.Forms.Button btnShowInfoBytes;
-        private System.Windows.Forms.Button ShowInfoTree;
+        private System.Windows.Forms.Button btnShowInfoTree;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txbxArchivePath;
@@ -203,5 +258,10 @@
         private System.Windows.Forms.Label lblStatusWork;
         private System.Windows.Forms.TextBox txbxArchiveName;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Timer timerProgress;
+        private System.Windows.Forms.Label lblTimer;
+        private System.Windows.Forms.Label lblTimePassed;
+        private System.Windows.Forms.Label lblTimeRemaining;
+        private System.Windows.Forms.Label lblTimerRemaining;
     }
 }
