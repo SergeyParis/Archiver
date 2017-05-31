@@ -8,6 +8,13 @@ namespace Lab_2
 {
     public static class WorkWithBytes
     {
+        /// <summary>
+        /// ===============================
+        /// use WorkWithFile.FillDictionary()
+        /// ===============================
+        /// </summary>
+        /// <param name="allSybols"></param>
+        /// <returns></returns>
         public static int[] FillDictionary(byte[] allSybols)
         {
             int[] dictionary = new int[256];

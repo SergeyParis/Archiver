@@ -38,7 +38,7 @@
             this.txbxArchivePath = new System.Windows.Forms.TextBox();
             this.btnChangeArchivePath = new System.Windows.Forms.Button();
             this.btnChangeFilePath = new System.Windows.Forms.Button();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.progressBarFileArchiving = new System.Windows.Forms.ProgressBar();
             this.lblStatusWork = new System.Windows.Forms.Label();
             this.txbxArchiveName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,6 +47,7 @@
             this.lblTimePassed = new System.Windows.Forms.Label();
             this.lblTimeRemaining = new System.Windows.Forms.Label();
             this.lblTimerRemaining = new System.Windows.Forms.Label();
+            this.progressBarInfoArchiving = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // txbxFilePath
@@ -135,12 +136,12 @@
             this.btnChangeFilePath.UseVisualStyleBackColor = true;
             this.btnChangeFilePath.Click += new System.EventHandler(this.btnChangeFilePath_Click);
             // 
-            // progressBar1
+            // progressBarFileArchiving
             // 
-            this.progressBar1.Location = new System.Drawing.Point(5, 86);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(581, 20);
-            this.progressBar1.TabIndex = 10;
+            this.progressBarFileArchiving.Location = new System.Drawing.Point(104, 86);
+            this.progressBarFileArchiving.Name = "progressBarFileArchiving";
+            this.progressBarFileArchiving.Size = new System.Drawing.Size(482, 20);
+            this.progressBarFileArchiving.TabIndex = 10;
             // 
             // lblStatusWork
             // 
@@ -210,15 +211,23 @@
             this.lblTimerRemaining.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblTimerRemaining.Location = new System.Drawing.Point(510, 113);
             this.lblTimerRemaining.Name = "lblTimerRemaining";
-            this.lblTimerRemaining.Size = new System.Drawing.Size(79, 15);
+            this.lblTimerRemaining.Size = new System.Drawing.Size(67, 15);
             this.lblTimerRemaining.TabIndex = 17;
-            this.lblTimerRemaining.Text = "00:00:00.000";
+            this.lblTimerRemaining.Text = "- -:- -:- -.- - -";
+            // 
+            // progressBarInfoArchiving
+            // 
+            this.progressBarInfoArchiving.Location = new System.Drawing.Point(4, 86);
+            this.progressBarInfoArchiving.Name = "progressBarInfoArchiving";
+            this.progressBarInfoArchiving.Size = new System.Drawing.Size(94, 20);
+            this.progressBarInfoArchiving.TabIndex = 18;
             // 
             // Archiving
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(604, 139);
+            this.Controls.Add(this.progressBarInfoArchiving);
             this.Controls.Add(this.lblTimerRemaining);
             this.Controls.Add(this.lblTimeRemaining);
             this.Controls.Add(this.lblTimePassed);
@@ -226,7 +235,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txbxArchiveName);
             this.Controls.Add(this.lblStatusWork);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.progressBarFileArchiving);
             this.Controls.Add(this.btnChangeFilePath);
             this.Controls.Add(this.btnChangeArchivePath);
             this.Controls.Add(this.label2);
@@ -254,7 +263,7 @@
         private System.Windows.Forms.TextBox txbxArchivePath;
         private System.Windows.Forms.Button btnChangeArchivePath;
         private System.Windows.Forms.Button btnChangeFilePath;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar progressBarFileArchiving;
         private System.Windows.Forms.Label lblStatusWork;
         private System.Windows.Forms.TextBox txbxArchiveName;
         private System.Windows.Forms.Label label3;
@@ -263,5 +272,6 @@
         private System.Windows.Forms.Label lblTimePassed;
         private System.Windows.Forms.Label lblTimeRemaining;
         private System.Windows.Forms.Label lblTimerRemaining;
+        private System.Windows.Forms.ProgressBar progressBarInfoArchiving;
     }
 }
