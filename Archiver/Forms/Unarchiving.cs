@@ -1,5 +1,4 @@
-﻿using Lab_2;
-using Lab_2.Trees;
+﻿using Archiver;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -9,8 +8,9 @@ using System.IO;
 using System.Security.Principal;
 using System.Text;
 using System.Windows.Forms;
+using Archiver.Trees;
 
-namespace Lab_2.Forms
+namespace Archiver.Forms
 {
     public partial class Unarchiving : Form
     {
@@ -154,7 +154,8 @@ namespace Lab_2.Forms
 
         private void AddProgressMethod(int value)
         {
-            this.progressBar1.Value += value;
+            if (this.progressBar1.Value < this.progressBar1.Maximum)
+                this.progressBar1.Value += value;
         }
         private void SetStatusLabelStatusMethod(string text)
         {
@@ -177,7 +178,12 @@ namespace Lab_2.Forms
         {
             string[] fileName = this.txbxArhivePath.Text.Split('.');
             string fileExtension = fileName[fileName.Length - 1];
-            
+
+            if (this.progressBar1.Value == this.progressBar1.Maximum)
+            {
+                this.Dispose();
+                return;
+            }
             if (string.IsNullOrWhiteSpace(this.txbxArhivePath.Text) )
             {
                 MessageBox.Show("Choose file filePath");
@@ -217,8 +223,10 @@ namespace Lab_2.Forms
                 Invoke(this._setStatusLabelText, "Completed");
 
             this.timerProgress.Stop();
+            this.btnChangeArchivePath.Enabled = false;
+            this.btnChangeFilePath.Enabled = false;
 
-            this.lblTimerPassed.Text = "--:--:--.---";
+            this.btnUnarchiving.Text = "OK";
             this.lblTimerRemaining.Text = "--:--:--.---";
         }
 

@@ -1,6 +1,8 @@
-﻿namespace Lab_2
+﻿using Archiver.Trees;
+
+namespace Archiver
 {
-    using Lab_2.Trees;
+    using Archiver.Trees;
     using System;
     using System.Collections;
     using System.Collections.Generic;

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Lab_2.Forms;
+using Archiver.Forms;
 
-namespace Lab_2
+namespace Archiver
 {
     static class Program
     {

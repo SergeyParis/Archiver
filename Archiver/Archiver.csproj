@@ -7,8 +7,8 @@
     <ProjectGuid>{4BCE9FAE-3BF7-4759-80D2-650F15FAA7F9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lab_2</RootNamespace>
-    <AssemblyName>Lab 2</AssemblyName>
+    <RootNamespace>Archiver</RootNamespace>
+    <AssemblyName>Archiver</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

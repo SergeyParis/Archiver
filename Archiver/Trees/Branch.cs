@@ -1,4 +1,4 @@
-﻿namespace Lab_2.Trees
+﻿namespace Archiver.Trees
 {
     public class Branch
     {

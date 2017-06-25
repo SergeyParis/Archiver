@@ -1,6 +1,6 @@
-﻿namespace Lab_2.Forms
+﻿namespace Archiver.Forms
 {
-    using Lab_2;
+    using Archiver;
     using System;
     using System.ComponentModel;
     using System.Drawing;

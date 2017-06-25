@@ -1,4 +1,4 @@
-﻿namespace Lab_2
+﻿namespace Archiver
 {
     using System;
     using System.IO;

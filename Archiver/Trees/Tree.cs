@@ -1,8 +1,8 @@
 ﻿using System.Windows.Forms.VisualStyles;
 
-namespace Lab_2.Trees
+namespace Archiver.Trees
 {
-    using Lab_2;
+    using Archiver;
     using System;
     using System.Collections;
     using System.Collections.Generic;

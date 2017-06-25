@@ -1,11 +1,11 @@
-D:\dev\projects\C#\Archiver\Archiver\bin\Release\Lab 2.exe.config
-D:\dev\projects\C#\Archiver\Archiver\bin\Release\Lab 2.exe
-D:\dev\projects\C#\Archiver\Archiver\bin\Release\Lab 2.pdb
 D:\dev\projects\C#\Archiver\Archiver\obj\Release\Archiver.csprojResolveAssemblyReference.cache
-D:\dev\projects\C#\Archiver\Archiver\obj\Release\Lab_2.Forms.Archiving.resources
-D:\dev\projects\C#\Archiver\Archiver\obj\Release\Lab_2.Forms.Choose.resources
-D:\dev\projects\C#\Archiver\Archiver\obj\Release\Lab_2.Forms.Unarchiving.resources
-D:\dev\projects\C#\Archiver\Archiver\obj\Release\Lab_2.Properties.Resources.resources
 D:\dev\projects\C#\Archiver\Archiver\obj\Release\Archiver.csproj.GenerateResource.Cache
-D:\dev\projects\C#\Archiver\Archiver\obj\Release\Lab 2.exe
-D:\dev\projects\C#\Archiver\Archiver\obj\Release\Lab 2.pdb
+D:\dev\projects\C#\Archiver\Archiver\bin\Release\Archiver.exe.config
+D:\dev\projects\C#\Archiver\Archiver\bin\Release\Archiver.exe
+D:\dev\projects\C#\Archiver\Archiver\bin\Release\Archiver.pdb
+D:\dev\projects\C#\Archiver\Archiver\obj\Release\Archiver.Forms.Archiving.resources
+D:\dev\projects\C#\Archiver\Archiver\obj\Release\Archiver.Forms.Choose.resources
+D:\dev\projects\C#\Archiver\Archiver\obj\Release\Archiver.Forms.Unarchiving.resources
+D:\dev\projects\C#\Archiver\Archiver\obj\Release\Archiver.Properties.Resources.resources
+D:\dev\projects\C#\Archiver\Archiver\obj\Release\Archiver.exe
+D:\dev\projects\C#\Archiver\Archiver\obj\Release\Archiver.pdb

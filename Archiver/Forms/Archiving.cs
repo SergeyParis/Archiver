@@ -1,8 +1,10 @@
 ﻿
-namespace Lab_2.Forms
+using Archiver.Trees;
+
+namespace Archiver.Forms
 {
-    using Lab_2;
-    using Lab_2.Trees;
+    using Archiver;
+    using Archiver.Trees;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -181,7 +183,8 @@ namespace Lab_2.Forms
 
         private void AddProgressBarMainValue(int value)
         {
-            this.progressBarFileArchiving.Value += value;
+            if (this.progressBarFileArchiving.Value < this.progressBarFileArchiving.Maximum)
+                this.progressBarFileArchiving.Value += value;
         }
         private void AddProgressBarInfoValue(int value)
         {
@@ -195,6 +198,12 @@ namespace Lab_2.Forms
         #region events
         private void btnArchiving_Click(object sender, EventArgs e)
         {
+            if (this.progressBarInfoArchiving.Value == this.progressBarInfoArchiving.Maximum)
+            {
+                this.Dispose();
+                return;
+            }
+
             if (string.IsNullOrWhiteSpace(this.txbxFilePath.Text))
             {
                 MessageBox.Show("Choose file path");
@@ -279,8 +288,10 @@ namespace Lab_2.Forms
                 Invoke(this._setStatusLabelText, "Completed");
 
             this.timerProgress.Stop();
+            this.btnChangeArchivePath.Enabled = false;
+            this.btnChangeFilePath.Enabled = false;
 
-            this.lblTimerPassed.Text = "--:--:--.---";
+            this.btnArchiving.Text = "OK";
             this.lblTimerRemaining.Text = "--:--:--.---";
         }
         #endregion

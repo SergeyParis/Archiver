@@ -1,4 +1,4 @@
-﻿namespace Lab_2.Forms
+﻿namespace Archiver.Forms
 {
     partial class Unarchiving
     {
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btnArchiving = new System.Windows.Forms.Button();
+            this.btnUnarchiving = new System.Windows.Forms.Button();
             this.btnChangeFilePath = new System.Windows.Forms.Button();
             this.btnChangeArchivePath = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -45,15 +45,15 @@
             this.timerProgress = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // btnArchiving
+            // btnUnarchiving
             // 
-            this.btnArchiving.Location = new System.Drawing.Point(3, 59);
-            this.btnArchiving.Name = "btnArchiving";
-            this.btnArchiving.Size = new System.Drawing.Size(94, 23);
-            this.btnArchiving.TabIndex = 5;
-            this.btnArchiving.Text = "Unarchiving";
-            this.btnArchiving.UseVisualStyleBackColor = true;
-            this.btnArchiving.Click += new System.EventHandler(this.btnUnarchiving_Click);
+            this.btnUnarchiving.Location = new System.Drawing.Point(3, 59);
+            this.btnUnarchiving.Name = "btnUnarchiving";
+            this.btnUnarchiving.Size = new System.Drawing.Size(94, 23);
+            this.btnUnarchiving.TabIndex = 5;
+            this.btnUnarchiving.Text = "Unarchiving";
+            this.btnUnarchiving.UseVisualStyleBackColor = true;
+            this.btnUnarchiving.Click += new System.EventHandler(this.btnUnarchiving_Click);
             // 
             // btnChangeFilePath
             // 
@@ -191,7 +191,7 @@
             this.Controls.Add(this.txbxResultPath);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txbxArhivePath);
-            this.Controls.Add(this.btnArchiving);
+            this.Controls.Add(this.btnUnarchiving);
             this.MaximumSize = new System.Drawing.Size(620, 175);
             this.MinimumSize = new System.Drawing.Size(620, 175);
             this.Name = "Unarchiving";
@@ -203,7 +203,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btnArchiving;
+        private System.Windows.Forms.Button btnUnarchiving;
         private System.Windows.Forms.Button btnChangeFilePath;
         private System.Windows.Forms.Button btnChangeArchivePath;
         private System.Windows.Forms.Label label2;

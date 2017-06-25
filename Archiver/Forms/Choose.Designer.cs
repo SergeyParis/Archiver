@@ -1,4 +1,4 @@
-﻿namespace Lab_2.Forms
+﻿namespace Archiver.Forms
 {
     partial class Choose
     {
