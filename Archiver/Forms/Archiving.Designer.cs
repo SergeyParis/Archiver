@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.txbxFilePath = new System.Windows.Forms.TextBox();
             this.btnArchiving = new System.Windows.Forms.Button();
-            this.btnShowInfoBytes = new System.Windows.Forms.Button();
-            this.btnShowInfoTree = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txbxArchivePath = new System.Windows.Forms.TextBox();
@@ -43,9 +41,9 @@
             this.txbxArchiveName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.timerProgress = new System.Windows.Forms.Timer(this.components);
-            this.lblTimer = new System.Windows.Forms.Label();
-            this.lblTimePassed = new System.Windows.Forms.Label();
-            this.lblTimeRemaining = new System.Windows.Forms.Label();
+            this.lblTimerPassed = new System.Windows.Forms.Label();
+            this.label02 = new System.Windows.Forms.Label();
+            this.label01 = new System.Windows.Forms.Label();
             this.lblTimerRemaining = new System.Windows.Forms.Label();
             this.progressBarInfoArchiving = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
@@ -68,24 +66,6 @@
             this.btnArchiving.Text = "Archiving";
             this.btnArchiving.UseVisualStyleBackColor = true;
             this.btnArchiving.Click += new System.EventHandler(this.btnArchiving_Click);
-            // 
-            // btnShowInfoBytes
-            // 
-            this.btnShowInfoBytes.Location = new System.Drawing.Point(104, 59);
-            this.btnShowInfoBytes.Name = "btnShowInfoBytes";
-            this.btnShowInfoBytes.Size = new System.Drawing.Size(94, 23);
-            this.btnShowInfoBytes.TabIndex = 3;
-            this.btnShowInfoBytes.Text = "Show info bytes";
-            this.btnShowInfoBytes.UseVisualStyleBackColor = true;
-            // 
-            // btnShowInfoTree
-            // 
-            this.btnShowInfoTree.Location = new System.Drawing.Point(204, 59);
-            this.btnShowInfoTree.Name = "btnShowInfoTree";
-            this.btnShowInfoTree.Size = new System.Drawing.Size(94, 23);
-            this.btnShowInfoTree.TabIndex = 4;
-            this.btnShowInfoTree.Text = "Show tree";
-            this.btnShowInfoTree.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -175,35 +155,35 @@
             this.timerProgress.Interval = 1;
             this.timerProgress.Tick += new System.EventHandler(this.timerProgress_Tick);
             // 
-            // lblTimer
+            // lblTimerPassed
             // 
-            this.lblTimer.AutoSize = true;
-            this.lblTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblTimer.Location = new System.Drawing.Point(88, 113);
-            this.lblTimer.Name = "lblTimer";
-            this.lblTimer.Size = new System.Drawing.Size(79, 15);
-            this.lblTimer.TabIndex = 14;
-            this.lblTimer.Text = "00:00:00.000";
+            this.lblTimerPassed.AutoSize = true;
+            this.lblTimerPassed.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblTimerPassed.Location = new System.Drawing.Point(88, 113);
+            this.lblTimerPassed.Name = "lblTimerPassed";
+            this.lblTimerPassed.Size = new System.Drawing.Size(67, 15);
+            this.lblTimerPassed.TabIndex = 14;
+            this.lblTimerPassed.Text = "- -:- -:- -.- - -";
             // 
-            // lblTimePassed
+            // label02
             // 
-            this.lblTimePassed.AutoSize = true;
-            this.lblTimePassed.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblTimePassed.Location = new System.Drawing.Point(4, 113);
-            this.lblTimePassed.Name = "lblTimePassed";
-            this.lblTimePassed.Size = new System.Drawing.Size(81, 15);
-            this.lblTimePassed.TabIndex = 15;
-            this.lblTimePassed.Text = "Time passed:";
+            this.label02.AutoSize = true;
+            this.label02.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label02.Location = new System.Drawing.Point(4, 113);
+            this.label02.Name = "label02";
+            this.label02.Size = new System.Drawing.Size(81, 15);
+            this.label02.TabIndex = 15;
+            this.label02.Text = "Time passed:";
             // 
-            // lblTimeRemaining
+            // label01
             // 
-            this.lblTimeRemaining.AutoSize = true;
-            this.lblTimeRemaining.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblTimeRemaining.Location = new System.Drawing.Point(408, 113);
-            this.lblTimeRemaining.Name = "lblTimeRemaining";
-            this.lblTimeRemaining.Size = new System.Drawing.Size(97, 15);
-            this.lblTimeRemaining.TabIndex = 16;
-            this.lblTimeRemaining.Text = "Time remaining:";
+            this.label01.AutoSize = true;
+            this.label01.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label01.Location = new System.Drawing.Point(408, 113);
+            this.label01.Name = "label01";
+            this.label01.Size = new System.Drawing.Size(97, 15);
+            this.label01.TabIndex = 16;
+            this.label01.Text = "Time remaining:";
             // 
             // lblTimerRemaining
             // 
@@ -226,12 +206,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(604, 139);
+            this.ClientSize = new System.Drawing.Size(604, 136);
             this.Controls.Add(this.progressBarInfoArchiving);
             this.Controls.Add(this.lblTimerRemaining);
-            this.Controls.Add(this.lblTimeRemaining);
-            this.Controls.Add(this.lblTimePassed);
-            this.Controls.Add(this.lblTimer);
+            this.Controls.Add(this.label01);
+            this.Controls.Add(this.label02);
+            this.Controls.Add(this.lblTimerPassed);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txbxArchiveName);
             this.Controls.Add(this.lblStatusWork);
@@ -241,10 +221,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txbxArchivePath);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnShowInfoTree);
-            this.Controls.Add(this.btnShowInfoBytes);
             this.Controls.Add(this.btnArchiving);
             this.Controls.Add(this.txbxFilePath);
+            this.MaximumSize = new System.Drawing.Size(620, 175);
+            this.MinimumSize = new System.Drawing.Size(620, 175);
             this.Name = "Archiving";
             this.Text = "Archiving";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Archiving_FormClosing);
@@ -256,8 +236,6 @@
         #endregion
         private System.Windows.Forms.TextBox txbxFilePath;
         private System.Windows.Forms.Button btnArchiving;
-        private System.Windows.Forms.Button btnShowInfoBytes;
-        private System.Windows.Forms.Button btnShowInfoTree;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txbxArchivePath;
@@ -268,9 +246,9 @@
         private System.Windows.Forms.TextBox txbxArchiveName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Timer timerProgress;
-        private System.Windows.Forms.Label lblTimer;
-        private System.Windows.Forms.Label lblTimePassed;
-        private System.Windows.Forms.Label lblTimeRemaining;
+        private System.Windows.Forms.Label lblTimerPassed;
+        private System.Windows.Forms.Label label02;
+        private System.Windows.Forms.Label label01;
         private System.Windows.Forms.Label lblTimerRemaining;
         private System.Windows.Forms.ProgressBar progressBarInfoArchiving;
     }

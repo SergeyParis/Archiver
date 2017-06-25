@@ -14,19 +14,23 @@ namespace Lab_2.Forms
 {
     public partial class Unarchiving : Form
     {
-        private const int STEP_FOR_PROGRESSBAR = 100;
-
         #region fields
+        private readonly int _stepForProgressbar = Convert.ToInt32(Properties.Resources.StepForProgressbar);
+        private readonly int _timerInterval = Convert.ToInt32(Properties.Resources.TimerInterval);
+
         private string _fileFullName;
         private int _countOfNulls;
         private long _fileLength;
 
         private Tree _tree;
 
+        private TimeSpan _timePassed;
+        private TimeSpan _timeRemaining;
+        private DateTime _timeStart;
+
         private readonly BackgroundWorker _backgroundWorkerUnarchive;
 
         private readonly AddProgress _addProgress;
-        private readonly SetMaximalProgressBarValueDelegate _setMaximalProgressBarValueDelegate;
         private readonly SetStatusLabelText _setStatusLabelText;
         #endregion
 
@@ -45,9 +49,11 @@ namespace Lab_2.Forms
             this._backgroundWorkerUnarchive.RunWorkerCompleted += new RunWorkerCompletedEventHandler(this._backgroundWorkerUnarchive_RunWorkerCompleted);
             this._backgroundWorkerUnarchive.DoWork += new DoWorkEventHandler(this._backgroundWorkerUnarchive_DoWork);
 
-            this._setMaximalProgressBarValueDelegate = new SetMaximalProgressBarValueDelegate(this.SetMaximalProgressBarValueDelegateMethod);
             this._addProgress = new AddProgress(this.AddProgressMethod);
             this._setStatusLabelText = new SetStatusLabelText(SetStatusLabelStatusMethod);
+
+            this.progressBar1.Maximum = this._stepForProgressbar;
+            this.timerProgress.Interval = this._timerInterval;
         }
 
         private void ConvertToTree(byte[] bytes)
@@ -102,13 +108,15 @@ namespace Lab_2.Forms
         private void WriteFileIntoFile(BinaryReader reader)
         {
             string[] filePathAndName = { this.txbxResultPath.Text, @"\", this._fileFullName };
+            
+            this._timeStart = DateTime.Now;
 
             using (BinaryWriter writer = new BinaryWriter(File.Open(string.Concat(filePathAndName),
                                                           FileMode.Create, FileAccess.ReadWrite, FileShare.Read)))
             {
                 Branch currentBranch = this._tree.Root;
 
-                long sizeOnePersentProgress = this._fileLength / 100;
+                long sizeOnePersentProgress = this._fileLength / this._stepForProgressbar;
                 long counterProgress = 0;
 
                 try
@@ -148,14 +156,6 @@ namespace Lab_2.Forms
         {
             this.progressBar1.Value += value;
         }
-        private void SetMaximalProgressBarValueDelegateMethod(long max)
-        {
-            this.progressBar1.Value = 0;
-            this.progressBar1.Minimum = 0;
-
-            int temp = (int)(max / STEP_FOR_PROGRESSBAR);
-            this.progressBar1.Maximum = temp;
-        }
         private void SetStatusLabelStatusMethod(string text)
         {
             this.lblStatusWork.Text = text;
@@ -165,7 +165,9 @@ namespace Lab_2.Forms
         private void btnChangeArchivePath_Click(object sender, EventArgs e)
         {
             this.txbxArhivePath.Text = WorkWithFile.OpenFile();
-            this.txbxResultPath.Text = this.txbxArhivePath.Text.Remove(this.txbxArhivePath.Text.LastIndexOf(@"\") + 1);
+
+            if (!String.IsNullOrWhiteSpace(this.txbxArhivePath.Text))
+                this.txbxResultPath.Text = this.txbxArhivePath.Text.Remove(this.txbxArhivePath.Text.LastIndexOf(@"\") + 1);
         }
         private void btnChangeResultPath_Click(object sender, EventArgs e)
         {
@@ -173,9 +175,17 @@ namespace Lab_2.Forms
         }
         private void btnUnarchiving_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(this.txbxArhivePath.Text))
+            string[] fileName = this.txbxArhivePath.Text.Split('.');
+            string fileExtension = fileName[fileName.Length - 1];
+            
+            if (string.IsNullOrWhiteSpace(this.txbxArhivePath.Text) )
             {
                 MessageBox.Show("Choose file filePath");
+                this.btnChangeArchivePath_Click(null, null);
+            }
+            else if (fileExtension != "Haffman")
+            {
+                MessageBox.Show("Choose correct file (.Huffman)");
                 this.btnChangeArchivePath_Click(null, null);
             }
             else if (string.IsNullOrWhiteSpace(this.txbxResultPath.Text))
@@ -185,6 +195,8 @@ namespace Lab_2.Forms
             }
             else
             {
+                this.timerProgress.Start();
+
                 this._backgroundWorkerUnarchive.RunWorkerAsync();
             }
         }
@@ -203,17 +215,42 @@ namespace Lab_2.Forms
         {
             if (!this._backgroundWorkerUnarchive.CancellationPending)
                 Invoke(this._setStatusLabelText, "Completed");
+
+            this.timerProgress.Stop();
+
+            this.lblTimerPassed.Text = "--:--:--.---";
+            this.lblTimerRemaining.Text = "--:--:--.---";
+        }
+
+        private void timerProgress_Tick(object sender, EventArgs e)
+        {
+            this._timePassed = DateTime.Now - this._timeStart;
+
+            string temp = this._timePassed.ToString();
+            this.lblTimerPassed.Text = temp.Remove(temp.Length - 4);
+            
+            if (this.progressBar1.Value > 1)
+            {
+                string tempRemaining = this._timeRemaining.ToString();
+                this.lblTimerRemaining.Text = tempRemaining.Remove(tempRemaining.Length - 4);
+            }
         }
 
         private void ProgressBarAddedProgress()
         {
             try { Invoke(this._addProgress, 1); }
-            catch (ObjectDisposedException) { return; }
+            catch (ObjectDisposedException) { Application.Exit(); }
+            catch (InvalidOperationException) { Application.Exit(); }
+
+            this._timePassed = DateTime.Now - this._timeStart;
+
+            double secondsRemaining = (this._timePassed.TotalSeconds / this.progressBar1.Value) *
+                                      (this._stepForProgressbar - this.progressBar1.Value);
+            this._timeRemaining = TimeSpan.FromSeconds(secondsRemaining);
         }
         #endregion
 
         private delegate void AddProgress(int value);
-        private delegate void SetMaximalProgressBarValueDelegate(long max);
         private delegate void SetStatusLabelText(string text);
     }
 }

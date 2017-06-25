@@ -47,8 +47,11 @@
 
             int[] dictionary = new int[256];
 
-            using (BinaryReader reader = new BinaryReader(new FileStream(filePath, FileMode.Open)))
+
+            using (FileStream stream = new FileStream(filePath, FileMode.Open))
             {
+                BinaryReader reader = new BinaryReader(stream);
+
                 try
                 {
                     while (true)
